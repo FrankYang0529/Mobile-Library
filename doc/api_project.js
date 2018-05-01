@@ -1,0 +1,1 @@
+define({  "title": "Mobile Library API",  "url": "https://mobile-library.io",  "name": "mobile-library",  "version": "0.1.0",  "description": "",  "sampleUrl": false,  "defaultVersion": "0.0.0",  "apidoc": "0.3.0",  "generator": {    "name": "apidoc",    "time": "2018-05-01T12:12:05.436Z",    "url": "http://apidocjs.com",    "version": "0.17.6"  }});
