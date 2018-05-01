@@ -90,5 +90,9 @@
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "apidoc": {
+    "title": "Mobile Library API",
+    "url": "https://mobile-library.io"
   }
 }
