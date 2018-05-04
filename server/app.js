@@ -23,13 +23,14 @@ app.use(async (ctx, next) => {
 app.use(bodyParser())
 app.use(helmet())
 app.use(cors({
-  origin: process.env.ALLOW_ORIGIN,
+  origin: process.env.ALLOW_DOMAIN,
   credentials: true
 }))
 app.use(jwt({
-  secret: process.env.SECRET
+  secret: process.env.SECRET,
+  cookie: 'token'
 }).unless({
-  path: [/\/register/]
+  path: [/\/register/, /\/login/, /\/logout/]
 }))
 
 app.use(authRoute.routes())
