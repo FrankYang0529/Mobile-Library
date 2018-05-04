@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt')
-const jsonwebtoken = require('jsonwebtoken')
+const jwt = require('jsonwebtoken')
 
 const User = require('../models/user')
 
@@ -62,6 +62,36 @@ const register = async (ctx, next) => {
  * @apiErrorExample Error-Response:
  *  HTTP/1.1 401 Unauthorized
  */
+const login = async (ctx, next) => {
+  const { email, password } = ctx.request.body
+
+  try {
+    const user = await User.findOne({ email })
+    if (!user) {
+      ctx.throw(400, 'Can not find user')
+    }
+
+    const isSame = await bcrypt.compare(password, user.password)
+    if (!isSame) {
+      ctx.throw(401, 'Email or Password error')
+    }
+
+    const token = jwt.sign({
+      user: user.toJSON(),
+    }, process.env.SECRET, { expiresIn: process.env.MAX_AGE/1000 })
+
+    ctx.status = 200
+    ctx.body = user.toJSON()
+    ctx.cookies.set('token', token, {
+      domain: process.env.ALLOW_DOMAIN,
+      path: '/',
+      maxAge: process.env.MAX_AGE,
+      httpOnly: true
+    })
+  } catch (error) {
+    ctx.throw(error.status || 500, error.message)
+  }
+}
 
 /**
  * @api {get} /auth/logout Logout a user
@@ -90,4 +120,5 @@ const register = async (ctx, next) => {
 
 module.exports = {
   register,
+  login,
 }
