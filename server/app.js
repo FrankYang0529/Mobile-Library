@@ -6,6 +6,8 @@ const cors = require('@koa/cors')
 const jwt = require('koa-jwt')
 const mongoose = require('mongoose')
 
+const authRoute = require('./routes/auth')
+
 const app = new Koa()
 
 app.use(async (ctx, next) => {
@@ -29,6 +31,8 @@ app.use(jwt({
 }).unless({
   path: [/\/register/]
 }))
+
+app.use(authRoute.routes())
 
 // Not Found error
 app.use(async (ctx, next) => {
