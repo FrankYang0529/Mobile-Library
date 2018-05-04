@@ -8,9 +8,10 @@ const User = require('../models/user')
  * @apiName SignUp
  * @apiGroup auth
  *
- * @apiParam (Request body) {String} email    User email.
- * @apiParam (Request body) {String} name     User name.
- * @apiParam (Request body) {String} password User password.
+ * @apiParam (Request body) {String} email     User email.
+ * @apiParam (Request body) {String} firstName User first name.
+ * @apiParam (Request body) {String} lastName  User last name.
+ * @apiParam (Request body) {String} password  User password.
  *
  * @apiSuccessExample Success-Response:
  *  HTTP/1.1 201 Created
@@ -114,16 +115,24 @@ const logout = async (ctx, next) => {
  * @apiSuccessExample Success-Response:
  *  HTTP/1.1 200 OK
  *  {
- *    "name": "Frank",
- *    "email": "tmp@gmail.com"
+ *    "user": {
+ *      "email": "tmp@tmp.com",
+ *      "firstName": "foo",
+ *      "lastName": "bar"
+ *    }
  *  }
  *
  * @apiErrorExample Error-Response:
- *  HTTP/1.1 403 Forbidden
+ *  HTTP/1.1 401 Unauthorized
  */
+const me = async (ctx, next) => {
+  ctx.status = 200
+  ctx.body = ctx.state.user
+}
 
 module.exports = {
   register,
   login,
   logout,
+  me,
 }
