@@ -101,6 +101,10 @@ const login = async (ctx, next) => {
  * @apiSuccessExample Success-Response:
  *  HTTP/1.1 200 OK
  */
+const logout = async (ctx, next) => {
+  ctx.status = 200
+  ctx.cookies.set('token', null)
+}
 
 /**
  * @api {get} /auth/me Get user information
@@ -121,4 +125,5 @@ const login = async (ctx, next) => {
 module.exports = {
   register,
   login,
+  logout,
 }
