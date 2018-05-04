@@ -4,6 +4,7 @@ const bodyParser = require('koa-bodyparser')
 const helmet = require('koa-helmet')
 const cors = require('@koa/cors')
 const jwt = require('koa-jwt')
+const mongoose = require('mongoose')
 
 const app = new Koa()
 
@@ -25,6 +26,8 @@ app.use(cors({
 }))
 app.use(jwt({
   secret: process.env.SECRET
+}).unless({
+  path: [/\/register/]
 }))
 
 // Not Found error
@@ -36,5 +39,8 @@ app.use(async (ctx, next) => {
 app.on('error', (err) => {
   console.log(err.message)
 })
+
+// DB
+mongoose.connect(process.env.DB_URI)
 
 module.exports = app
