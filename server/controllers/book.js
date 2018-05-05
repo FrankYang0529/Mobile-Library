@@ -71,6 +71,9 @@ const getBooks = async (ctx, next) => {
  * @apiParam (Request body) {String} previewLink Preview link of the book.
  * @apiParam (Request body) {String} [isbn_10] 10-digit ISBN of the book.
  * @apiParam (Request body) {String} [isbn_13] 13-digit ISBN of the book.
+ *
+ * @apiSuccessExample Success-Response:
+ *  HTTP/1.1 200 OK
  */
 const updateBook = async (ctx, next) => {
   if (!ctx.request.body.name) {
@@ -85,8 +88,19 @@ const updateBook = async (ctx, next) => {
   ctx.status = 200
 }
 
+/**
+ * @api {delete} /book/id Delete a book
+ * @apiName UpdateBook
+ * @apiGroup book
+ *
+ * @apiParam {String} id ID of the book.
+ *
+ * @apiSuccessExample Success-Response:
+ *  HTTP/1.1 200 OK
+ */
+
 module.exports = {
   createBook,
   getBooks,
-  updateBook
+  updateBook,
 }
