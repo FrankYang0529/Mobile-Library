@@ -1,10 +1,13 @@
 const mongoose = require('mongoose')
 
+const Book = require('./book')
+
 const UserSchema = mongoose.Schema({
   email: { type: String, require: true, index: { unique: true } },
   firstName: { type: String, require: true },
   lastName: { type: String, require: true },
-  password: { type: String, require: true }
+  password: { type: String, require: true },
+  books: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Book' }]
 })
 
 UserSchema.path('email').validate((email) => {
@@ -15,6 +18,7 @@ UserSchema.path('email').validate((email) => {
 UserSchema.set('toJSON', {
   transform: (doc, ret, options) => {
     return {
+      _id: ret._id,
       email: ret.email,
       firstName: ret.firstName,
       lastName: ret.lastName
