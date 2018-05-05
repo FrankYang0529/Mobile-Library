@@ -98,9 +98,15 @@ const updateBook = async (ctx, next) => {
  * @apiSuccessExample Success-Response:
  *  HTTP/1.1 200 OK
  */
+const deleteBook = async (ctx, next) => {
+  await Book.findByIdAndRemove(ctx.params.id)
+
+  ctx.status = 200
+}
 
 module.exports = {
   createBook,
   getBooks,
   updateBook,
+  deleteBook
 }

@@ -7,5 +7,6 @@ const router = new Router()
 router.post('/book', book.createBook)
 router.get('/book', book.getBooks)
 router.put('/book/:id', book.updateBook)
+router.delete('/book/:id', book.deleteBook)
 
 module.exports = router
