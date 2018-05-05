@@ -50,6 +50,13 @@ const createBook = async (ctx, next) => {
  *    ]
  *  }
  */
+const getBooks = async (ctx, next) => {
+  const books = await Book.find({ owner: ctx.state.user._id }).exec()
+  const booksJSON = books.map((book) => book.toObject())
+
+  ctx.status = 200
+  ctx.body = booksJSON
+}
 
 /**
  * @api {put} /book/id Modify a book
@@ -68,4 +75,5 @@ const createBook = async (ctx, next) => {
 
 module.exports = {
   createBook,
+  getBooks
 }
