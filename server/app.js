@@ -7,6 +7,7 @@ const jwt = require('koa-jwt')
 const mongoose = require('mongoose')
 
 const authRoute = require('./routes/auth')
+const bookRoute = require('./routes/book')
 
 const app = new Koa()
 
@@ -34,6 +35,7 @@ app.use(jwt({
 }))
 
 app.use(authRoute.routes())
+app.use(bookRoute.routes())
 
 // Not Found error
 app.use(async (ctx, next) => {

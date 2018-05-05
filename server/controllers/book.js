@@ -1,3 +1,5 @@
+const Book = require('../models/book')
+
 /**
  * @api {post} /book Create a book
  * @apiName CreateBook
@@ -11,8 +13,21 @@
  * @apiParam (Request body) {String} [isbn_13] 13-digit ISBN of the book.
  *
  * @apiSuccessExample Success-Response:
- *  HTTP/1.1 200 OK
+ *  HTTP/1.1 201 Created
  */
+const createBook = async (ctx, next) => {
+  if (!ctx.request.body.name) {
+    ctx.throw(400, 'Please input book name.')
+  }
+
+  const book = Book({
+    ...ctx.request.body,
+    owner: ctx.state.user._id
+  })
+  await book.save()
+
+  ctx.status = 201
+}
 
 /**
  * @api {get} /book Get book list
@@ -50,3 +65,7 @@
  * @apiParam (Request body) {String} [isbn_10] 10-digit ISBN of the book.
  * @apiParam (Request body) {String} [isbn_13] 13-digit ISBN of the book.
  */
+
+module.exports = {
+  createBook,
+}
