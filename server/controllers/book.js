@@ -39,7 +39,7 @@ const createBook = async (ctx, next) => {
  *  {
  *    "books": [
  *      {
- *        "id": "xxx",
+ *        "_id": "5aed5b082db4167285600786",
  *        "name": "Thinking, Fast and Slow",
  *        "authors": ["Daniel Kahneman"],
  *        "publisher": "Penguin Group UK",
@@ -59,7 +59,7 @@ const getBooks = async (ctx, next) => {
 }
 
 /**
- * @api {put} /book/id Modify a book
+ * @api {put} /book/id Update a book
  * @apiName UpdateBook
  * @apiGroup book
  *
@@ -72,8 +72,21 @@ const getBooks = async (ctx, next) => {
  * @apiParam (Request body) {String} [isbn_10] 10-digit ISBN of the book.
  * @apiParam (Request body) {String} [isbn_13] 13-digit ISBN of the book.
  */
+const updateBook = async (ctx, next) => {
+  if (!ctx.request.body.name) {
+    ctx.throw(400, 'Please input book name.')
+  }
+
+  await Book.findByIdAndUpdate(
+    ctx.params.id,
+    ctx.request.body
+  )
+
+  ctx.status = 200
+}
 
 module.exports = {
   createBook,
-  getBooks
+  getBooks,
+  updateBook
 }
