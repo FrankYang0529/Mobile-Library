@@ -90,7 +90,7 @@ const updateBook = async (ctx, next) => {
 
 /**
  * @api {delete} /book/id Delete a book
- * @apiName UpdateBook
+ * @apiName DeleteBook
  * @apiGroup book
  *
  * @apiParam {String} id ID of the book.
