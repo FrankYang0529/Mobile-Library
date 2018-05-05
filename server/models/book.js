@@ -10,5 +10,18 @@ const BookSchema = mongoose.Schema({
   isbn_13: String
 })
 
+BookSchema.set('toJSON', {
+  transform: (doc, ret, options) => {
+    return {
+      name: ret.name,
+      authors: ret.authors,
+      publisher: ret.publisher || '',
+      previewLink: ret.previewLink  || '',
+      isbn_10: ret.isbn_10 || '',
+      isbn_13: ret.isbn_13 || ''
+    }
+  }
+})
+
 const Book = mongoose.model('Book', BookSchema)
 module.exports = Book
