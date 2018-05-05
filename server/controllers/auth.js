@@ -116,6 +116,7 @@ const logout = async (ctx, next) => {
  *  HTTP/1.1 200 OK
  *  {
  *    "user": {
+ *      "_id": "5aec12683c812fdb68ec4d0f",
  *      "email": "tmp@tmp.com",
  *      "firstName": "foo",
  *      "lastName": "bar"
