@@ -24,7 +24,8 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
-    "server-dev": "DEBUG=http ./node_modules/.bin/nodemon server/bin/www"
+    "server-dev": "DEBUG=http ./node_modules/.bin/nodemon server/bin/www",
+    "apidoc": "./node_modules/apidoc/bin/apidoc -i server -o docs && node_modules/http-server/bin/http-server docs"
   },
   "jest": {
     "collectCoverageFrom": [
@@ -73,6 +74,7 @@
     "url": "https://mobile-library.io"
   },
   "devDependencies": {
+    "apidoc": "^0.17.6",
     "autoprefixer": "7.1.6",
     "babel-core": "^6.26.3",
     "babel-eslint": "7.2.3",
@@ -95,6 +97,7 @@
     "file-loader": "1.1.5",
     "fs-extra": "3.0.1",
     "html-webpack-plugin": "2.29.0",
+    "http-server": "^0.11.1",
     "jest": "20.0.4",
     "nodemon": "^1.17.3",
     "postcss-flexbugs-fixes": "3.2.0",
