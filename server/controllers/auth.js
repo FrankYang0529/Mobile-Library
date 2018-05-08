@@ -59,6 +59,14 @@ const register = async (ctx, next) => {
  *
  * @apiSuccessExample Success-Response:
  *  HTTP/1.1 200 OK
+ *  {
+ *    "user": {
+ *      "_id": "5aec12683c812fdb68ec4d0f",
+ *      "email": "tmp@tmp.com",
+ *      "firstName": "foo",
+ *      "lastName": "bar"
+ *    }
+ *  }
  *
  * @apiErrorExample Error-Response:
  *  HTTP/1.1 401 Unauthorized
