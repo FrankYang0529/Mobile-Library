@@ -97,7 +97,7 @@ const login = async (ctx, next) => {
     ctx.cookies.set('token', token, {
       domain: process.env.ALLOW_DOMAIN,
       path: '/',
-      maxAge: process.env.MAX_AGE,
+      maxAge: +process.env.MAX_AGE,
       httpOnly: true
     })
   } catch (error) {
