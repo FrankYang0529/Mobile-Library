@@ -1,5 +1,7 @@
 import login from './login'
+import me from './me'
 
 export {
-  login
+  login,
+  me
 }
