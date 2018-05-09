@@ -24,7 +24,7 @@ app.use(async (ctx, next) => {
 app.use(bodyParser())
 app.use(helmet())
 app.use(cors({
-  origin: process.env.ALLOW_DOMAIN,
+  origin: process.env.ALLOW_ORIGIN,
   credentials: true
 }))
 app.use(jwt({

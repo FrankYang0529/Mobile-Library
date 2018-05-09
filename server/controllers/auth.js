@@ -76,6 +76,7 @@ const login = async (ctx, next) => {
 
   try {
     const user = await User.findOne({ email })
+
     if (!user) {
       ctx.throw(400, 'Can not find user')
     }
@@ -90,7 +91,9 @@ const login = async (ctx, next) => {
     }, process.env.SECRET, { expiresIn: process.env.MAX_AGE/1000 })
 
     ctx.status = 200
-    ctx.body = user.toJSON()
+    ctx.body = {
+      user: user.toJSON()
+    }
     ctx.cookies.set('token', token, {
       domain: process.env.ALLOW_DOMAIN,
       path: '/',
@@ -136,7 +139,9 @@ const logout = async (ctx, next) => {
  */
 const me = async (ctx, next) => {
   ctx.status = 200
-  ctx.body = ctx.state.user
+  ctx.body = {
+    user: ctx.state.user
+  }
 }
 
 module.exports = {
