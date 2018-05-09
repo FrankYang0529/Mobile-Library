@@ -11,8 +11,16 @@ import HomePage from '../HomePage'
 import LoginPage from '../LoginPage'
 import BookListPage from '../BookListPage'
 import NewBookPage from '../NewBookPage'
+import { onMeRequest } from '../../actions/auth'
 
 class App extends React.Component {
+  componentDidMount() {
+    const { user, onMeRequestAction } = this.props
+    if (user) {
+      onMeRequestAction()
+    }
+  }
+
   render() {
     const { user } = this.props
 
@@ -42,4 +50,12 @@ const mapStateToProps = store => {
   return { user }
 }
 
-export default connect(mapStateToProps)(App)
+const mapDispatchToProps = dispatch => {
+  return {
+    onMeRequestAction: () => {
+      dispatch(onMeRequest())
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
