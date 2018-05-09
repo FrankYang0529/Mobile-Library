@@ -139,9 +139,7 @@ const logout = async (ctx, next) => {
  */
 const me = async (ctx, next) => {
   ctx.status = 200
-  ctx.body = {
-    user: ctx.state.user
-  }
+  ctx.body = ctx.state.user
 }
 
 module.exports = {
