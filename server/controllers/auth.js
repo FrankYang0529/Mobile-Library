@@ -86,9 +86,10 @@ const login = async (ctx, next) => {
       ctx.throw(401, 'Email or Password error')
     }
 
-    const token = jwt.sign({
-      user: user.toJSON(),
-    }, process.env.SECRET, { expiresIn: process.env.MAX_AGE/1000 })
+    const token = jwt.sign(
+      user.toJSON(),
+      process.env.SECRET, { expiresIn: process.env.MAX_AGE / 1000 }
+    )
 
     ctx.status = 200
     ctx.body = {
@@ -139,7 +140,9 @@ const logout = async (ctx, next) => {
  */
 const me = async (ctx, next) => {
   ctx.status = 200
-  ctx.body = ctx.state.user
+  ctx.body = {
+    user: ctx.state.user
+  }
 }
 
 module.exports = {
