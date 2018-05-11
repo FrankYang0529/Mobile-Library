@@ -11,36 +11,42 @@ import HomePage from '../HomePage'
 import LoginPage from '../LoginPage'
 import BookListPage from '../BookListPage'
 import NewBookPage from '../NewBookPage'
+import Header from '../../components/header'
 import { onMeRequest } from '../../actions/auth'
 
 class App extends React.Component {
-  componentDidMount() {
+  componentDidMount () {
     const { user, onMeRequestAction } = this.props
     if (user) {
       onMeRequestAction()
     }
   }
 
-  render() {
+  render () {
     const { user } = this.props
 
     return (
-      <Router>
-        <Switch>
-          <Route
-            exact path='/'
-            render={props => user ? <BookListPage /> : <HomePage />}
-          />
-          <Route
-            path='/login'
-            render={props => user ? <Redirect to={{pathname: '/'}} /> : <LoginPage />}
-          />
-          <Route
-            path='/new'
-            render={props => user ? <NewBookPage /> : <Redirect to={{pathname: '/login'}} />}
-          />
-        </Switch>
-      </Router>
+      <div>
+        <Header user={user} />
+        <div className='container'>
+          <Router>
+            <Switch>
+              <Route
+                exact path='/'
+                render={props => user ? <BookListPage /> : <HomePage />}
+              />
+              <Route
+                path='/login'
+                render={props => user ? <Redirect to={{pathname: '/'}} /> : <LoginPage />}
+              />
+              <Route
+                path='/new'
+                render={props => user ? <NewBookPage /> : <Redirect to={{pathname: '/login'}} />}
+              />
+            </Switch>
+          </Router>
+        </div>
+      </div>
     )
   }
 }
