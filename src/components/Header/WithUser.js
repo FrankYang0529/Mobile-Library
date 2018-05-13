@@ -31,7 +31,6 @@ class WithUser extends React.Component {
   render () {
     const { user, onLogoutRequestAction } = this.props
 
-    console.log('here2')
     return (
       <div className='container'>
         <NavbarBrand href='/'>Mobile Library</NavbarBrand>
@@ -41,9 +40,10 @@ class WithUser extends React.Component {
               <img
                 src={(user.avatar) ? user.avatar : 'https://s3-ap-northeast-1.amazonaws.com/mobile-library/public-avatar.png'}
                 className='img-fluid rounded-circle z-depth-0'
-                alt='User icon'
+                alt={`${user.lastName} icon`}
                 width='30'
               />
+              <span className='pl-2'>{user.lastName}</span>
             </DropdownToggle>
             <DropdownMenu right>
               <DropdownItem onClick={() => { onLogoutRequestAction() }}>

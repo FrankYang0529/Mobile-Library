@@ -26,7 +26,6 @@ class WithoutUser extends React.Component {
   }
 
   render () {
-    console.log('here')
     return (
       <div className='container'>
         <NavbarBrand href='/'>Mobile Library</NavbarBrand>
