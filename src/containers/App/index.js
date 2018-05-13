@@ -11,7 +11,7 @@ import HomePage from '../HomePage'
 import LoginPage from '../LoginPage'
 import BookListPage from '../BookListPage'
 import NewBookPage from '../NewBookPage'
-import Header from '../../components/header'
+import Header from '../../components/Header'
 import { onMeRequest } from '../../actions/auth'
 
 class App extends React.Component {
