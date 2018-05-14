@@ -55,7 +55,7 @@ const getBooks = async (ctx, next) => {
   const booksJSON = books.map((book) => book.toJSON())
 
   ctx.status = 200
-  ctx.body = booksJSON
+  ctx.body = { books: booksJSON }
 }
 
 /**
