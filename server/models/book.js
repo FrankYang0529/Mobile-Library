@@ -6,6 +6,7 @@ const BookSchema = mongoose.Schema({
   authors: [String],
   publisher: String,
   previewLink: String,
+  imgLink: String,
   isbn_10: String,
   isbn_13: String
 }, {
@@ -18,10 +19,12 @@ const BookSchema = mongoose.Schema({
 BookSchema.set('toJSON', {
   transform: (doc, ret, options) => {
     return {
+      _id: ret._id,
       name: ret.name,
       authors: ret.authors,
       publisher: ret.publisher || '',
       previewLink: ret.previewLink || '',
+      imgLink: ret.imgLink || '',
       isbn_10: ret.isbn_10 || '',
       isbn_13: ret.isbn_13 || '',
       created_at: ret.created_at.toGMTString()
