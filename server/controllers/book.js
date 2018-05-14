@@ -51,7 +51,7 @@ const createBook = async (ctx, next) => {
  *  }
  */
 const getBooks = async (ctx, next) => {
-  const books = await Book.find({ owner: ctx.state.user._id }).exec()
+  const books = await Book.find({ owner: ctx.state.user._id }).sort('-created_at').exec()
   const booksJSON = books.map((book) => book.toJSON())
 
   ctx.status = 200
