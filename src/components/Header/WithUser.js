@@ -40,10 +40,10 @@ class WithUser extends React.Component {
               <img
                 src={(user.avatar) ? user.avatar : 'https://s3-ap-northeast-1.amazonaws.com/mobile-library/public-avatar.png'}
                 className='img-fluid rounded-circle z-depth-0'
-                alt={`${user.lastName} icon`}
+                alt={`${user.firstName} icon`}
                 width='30'
               />
-              <span className='pl-2'>{user.lastName}</span>
+              <span className='pl-2'>{user.firstName}</span>
             </DropdownToggle>
             <DropdownMenu right>
               <DropdownItem onClick={() => { onLogoutRequestAction() }}>
