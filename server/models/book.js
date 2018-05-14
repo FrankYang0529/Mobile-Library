@@ -8,6 +8,11 @@ const BookSchema = mongoose.Schema({
   previewLink: String,
   isbn_10: String,
   isbn_13: String
+}, {
+  timestamps: {
+    createdAt: 'created_at',
+    updatedAt: 'updated_at'
+  }
 })
 
 BookSchema.set('toJSON', {
@@ -16,9 +21,10 @@ BookSchema.set('toJSON', {
       name: ret.name,
       authors: ret.authors,
       publisher: ret.publisher || '',
-      previewLink: ret.previewLink  || '',
+      previewLink: ret.previewLink || '',
       isbn_10: ret.isbn_10 || '',
-      isbn_13: ret.isbn_13 || ''
+      isbn_13: ret.isbn_13 || '',
+      created_at: ret.created_at.toGMTString()
     }
   }
 })
