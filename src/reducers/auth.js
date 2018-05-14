@@ -6,7 +6,7 @@ import {
 } from '../constants/auth'
 
 const initState = {
-  user: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null
+  user: window.localStorage.getItem('user') ? JSON.parse(window.localStorage.getItem('user')) : null
 }
 
 const auth = (state = initState, action) => {
