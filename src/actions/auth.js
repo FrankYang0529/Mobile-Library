@@ -6,7 +6,7 @@ import {
   ME_REQUEST,
   ME_SUCCESS,
   ME_ERROR,
-  REGISTER_REQUEST,
+  REGISTER_REQUEST
 } from '../constants/auth'
 
 export const onLoginRequest = ({ email, password }) => (
