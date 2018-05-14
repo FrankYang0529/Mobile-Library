@@ -1,8 +1,8 @@
 import { call, put, take } from 'redux-saga/effects'
 
-import { onMeSuccess } from '../actions/auth'
-import { ME_REQUEST } from '../constants/auth'
-import { me as meApi } from '../api/auth'
+import { onMeSuccess } from '../../actions/auth'
+import { ME_REQUEST } from '../../constants/auth'
+import { me as meApi } from '../../api/auth'
 
 export function * me (action) {
   try {

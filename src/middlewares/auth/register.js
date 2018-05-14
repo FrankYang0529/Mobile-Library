@@ -1,7 +1,7 @@
 import { call, take } from 'redux-saga/effects'
 
-import { REGISTER_REQUEST } from '../constants/auth'
-import { register as registerApi } from '../api/auth'
+import { REGISTER_REQUEST } from '../../constants/auth'
+import { register as registerApi } from '../../api/auth'
 
 export function * register (action) {
   try {

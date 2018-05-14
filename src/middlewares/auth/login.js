@@ -1,8 +1,8 @@
 import { call, put, take } from 'redux-saga/effects'
 
-import { onLoginSuccess } from '../actions/auth'
-import { LOGIN_REQUEST } from '../constants/auth'
-import { login as loginApi } from '../api/auth'
+import { onLoginSuccess } from '../../actions/auth'
+import { LOGIN_REQUEST } from '../../constants/auth'
+import { login as loginApi } from '../../api/auth'
 
 export function * login (action) {
   try {

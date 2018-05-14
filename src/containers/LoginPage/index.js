@@ -62,8 +62,6 @@ class LoginPage extends React.Component {
                   type='submit'
                   onClick={(e) => {
                     e.preventDefault()
-                    console.log(this.emailRef.current.value)
-                    console.log(this.passwordRef.current.value)
                     onLoginRequestAction({
                       email: this.emailRef.current.value,
                       password: this.passwordRef.current.value
