@@ -2,7 +2,7 @@ import { call, put, take } from 'redux-saga/effects'
 
 import { onLogoutSuccess } from '../actions/auth'
 import { LOGOUT_REQUEST } from '../constants/auth'
-import { logout as logoutApi } from '../api'
+import { logout as logoutApi } from '../api/auth'
 
 export function * logout () {
   try {
