@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import moment from 'moment'
 
 import './style.css'
+import SearchBook from './SearchBook'
 import { onGetBookListRequest } from '../../actions/book'
 
 class BookListPage extends React.Component {
@@ -15,6 +16,8 @@ class BookListPage extends React.Component {
 
     return (
       <div className='row'>
+        <SearchBook />
+        <div className='w-100' />
         {
           books.map(book => {
             const createdAt = moment(book.created_at, 'ddd, DD MMM YYYY HH:mm:ss')
