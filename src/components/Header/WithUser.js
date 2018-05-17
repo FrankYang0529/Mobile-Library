@@ -1,12 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import {
-  Dropdown,
+  Collapse,
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
   NavbarBrand,
-  Nav
+  NavbarToggler,
+  Nav,
+  NavItem,
+  NavLink,
+  UncontrolledDropdown
 } from 'reactstrap'
 
 import { onLogoutRequest } from '../../actions/auth'
@@ -16,15 +20,15 @@ class WithUser extends React.Component {
     super(props)
 
     this.state = {
-      dropdownOpen: false
+      navDropdownOpen: false
     }
 
-    this.toggle = this.toggle.bind(this)
+    this.toggleNav = this.toggleNav.bind(this)
   }
 
-  toggle () {
+  toggleNav () {
     this.setState(prevState => ({
-      dropdownOpen: !prevState.dropdownOpen
+      navDropdownOpen: !prevState.navDropdownOpen
     }))
   }
 
@@ -33,25 +37,36 @@ class WithUser extends React.Component {
 
     return (
       <div className='container'>
-        <NavbarBrand href='/'>Mobile Library</NavbarBrand>
-        <Nav className='ml-auto' navbar>
-          <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle} nav>
-            <DropdownToggle caret nav>
-              <img
-                src={(user.avatar) ? user.avatar : 'https://s3-ap-northeast-1.amazonaws.com/mobile-library/public-avatar.png'}
-                className='img-fluid rounded-circle z-depth-0'
-                alt={`${user.firstName} icon`}
-                width='30'
-              />
-              <span className='pl-2'>{user.firstName}</span>
-            </DropdownToggle>
-            <DropdownMenu right>
-              <DropdownItem onClick={() => { onLogoutRequestAction() }}>
-                Logout
-              </DropdownItem>
-            </DropdownMenu>
-          </Dropdown>
-        </Nav>
+        <NavbarBrand href='/' className='text-white'>Mobile Library</NavbarBrand>
+        <NavbarToggler onClick={this.toggleNav} />
+        <Collapse isOpen={this.state.navDropdownOpen} navbar>
+          <Nav className='ml-auto' navbar>
+            <DropdownItem divider />
+            <NavItem>
+              <NavLink href='/new' className='text-white'>
+                <i className='fas fa-plus' />
+                <span className='pl-2'>Add New Book</span>
+              </NavLink>
+            </NavItem>
+            <DropdownItem divider />
+            <UncontrolledDropdown nav inNavbar>
+              <DropdownToggle nav caret>
+                <img
+                  src={(user.avatar) ? user.avatar : 'https://s3-ap-northeast-1.amazonaws.com/mobile-library/public-avatar.png'}
+                  className='img-fluid rounded-circle z-depth-0'
+                  alt={`${user.firstName} icon`}
+                  width='30'
+                />
+                <span className='pl-2 text-white'>{user.firstName}</span>
+              </DropdownToggle>
+              <DropdownMenu right>
+                <DropdownItem onClick={() => { onLogoutRequestAction() }}>
+                  Logout
+                </DropdownItem>
+              </DropdownMenu>
+            </UncontrolledDropdown>
+          </Nav>
+        </Collapse>
       </div>
     )
   }
