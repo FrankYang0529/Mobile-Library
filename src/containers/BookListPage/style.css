@@ -1,0 +1,43 @@
+.book {
+  margin-bottom: 3rem;
+}
+
+.book .book-cover {
+  display: block;
+  margin: 0px auto;
+  margin-bottom: 1rem;
+  height: 15rem;
+}
+
+.book .book-content {
+  padding: 0 1rem;
+}
+
+.book .book-name-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.book .book-name {
+  display: inline-block;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.book .book-author {
+  display: inline-block;
+  width: 50%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: #838E95;
+}
+
+.book .book-date {
+  display: inline-block;
+  width: 50%;
+  text-align: right;
+  color: #838E95;
+}
