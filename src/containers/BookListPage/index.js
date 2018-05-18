@@ -12,14 +12,19 @@ class BookListPage extends React.Component {
   }
 
   render () {
-    const { books } = this.props
+    const { books, keyword } = this.props
+    let bookList = (keyword) ? (
+      books.filter((book) => (
+        JSON.stringify(Object.values(book)).includes(keyword)
+      ))
+    ) : books
 
     return (
       <div className='row'>
         <SearchBook />
         <div className='w-100' />
         {
-          books.map(book => {
+          bookList.map(book => {
             const createdAt = moment(book.created_at, 'ddd, DD MMM YYYY HH:mm:ss')
 
             return (
@@ -49,7 +54,8 @@ class BookListPage extends React.Component {
 
 const mapStateToProps = (store) => {
   return {
-    books: store.books
+    books: store.books,
+    keyword: store.searchBook.keyword
   }
 }
 
