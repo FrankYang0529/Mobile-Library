@@ -78,7 +78,12 @@ const getBooks = async (ctx, next) => {
  *  }
  */
 const getBook = async (ctx, next) => {
-  const book = await Book.findById(ctx.params.id)
+  let book = null
+  try {
+    book = await Book.findById(ctx.params.id)
+  } catch (error) {
+    ctx.throw(404, 'Book is not found')
+  }
 
   ctx.status = 200
   ctx.body = { book: book.toJSON() }
