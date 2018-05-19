@@ -59,6 +59,32 @@ const getBooks = async (ctx, next) => {
 }
 
 /**
+ * @api {get} /book/id Get book
+ * @apiName GetBook
+ * @apiGroup book
+ *
+ * @apiSuccessExample Success-Response:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    "book": {
+*       "_id": "5aed5b082db4167285600786",
+*       "name": "Thinking, Fast and Slow",
+*       "authors": ["Daniel Kahneman"],
+*       "publisher": "Penguin Group UK",
+*       "previewLink": "http://www.books.com.tw/products/F011910346",
+*       "isbn_10": "0141033576",
+*       "isbn_13": ""
+*     }
+ *  }
+ */
+const getBook = async (ctx, next) => {
+  const book = await Book.findById(ctx.params.id)
+
+  ctx.status = 200
+  ctx.body = { book: book.toJSON() }
+}
+
+/**
  * @api {put} /book/id Update a book
  * @apiName UpdateBook
  * @apiGroup book
@@ -107,6 +133,7 @@ const deleteBook = async (ctx, next) => {
 module.exports = {
   createBook,
   getBooks,
+  getBook,
   updateBook,
   deleteBook
 }
