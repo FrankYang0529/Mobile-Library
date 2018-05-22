@@ -43,10 +43,10 @@ export const onGetBookSuccess = ({ book }) => (
   }
 )
 
-export const onUpdateBookRequest = (payload) => (
+export const onUpdateBookRequest = ({ book }) => (
   {
     type: UPDATE_BOOK_REQUEST,
-    payload
+    payload: { book }
   }
 )
 
