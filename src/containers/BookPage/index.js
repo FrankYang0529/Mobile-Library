@@ -6,16 +6,25 @@ import { Col,
   Label,
   Button
 } from 'reactstrap'
+import { Redirect } from 'react-router'
 // import DatePicker from 'react-date-picker'
 
 import './style.css'
 import {
   onGetBookRequest,
   onUpdateBookRequest,
+  onDeleteBookRequest,
   onChangeBookData
 } from '../../actions/book'
 
 class BookPage extends React.Component {
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      redirect: false
+    }
+  }
   componentDidMount () {
     const { onGetBookRequestAction } = this.props
 
@@ -23,11 +32,19 @@ class BookPage extends React.Component {
   }
 
   render () {
-    const { onUpdateBookRequestAction, onChangeBookDataAction, book } = this.props
+    const {
+      onUpdateBookRequestAction,
+      onDeleteBookRequestAction,
+      onChangeBookDataAction,
+      book
+    } = this.props
+    const { redirect } = this.state
     // const createdAt = book.created_at ? new Date(book.created_at) : new Date(null)
 
-    return (
-      <div className='row'>
+    return redirect ? (
+      <Redirect to='/' />
+    ) : (
+      <div className='row book-page'>
         <Col xs={{ size: 8, offset: 2 }} sm={{ size: 8, offset: 2 }} md={{ size: 4, offset: 1 }}>
           <img
             src={book.imgLink}
@@ -148,7 +165,18 @@ class BookPage extends React.Component {
                 }}
               >Update
               </Button>
-              <Button color='danger' block>Delete</Button>
+              <Button
+                block
+                color='danger'
+                onClick={(e) => {
+                  e.preventDefault()
+                  onDeleteBookRequestAction({ id: book._id })
+                  this.setState({
+                    redirect: true
+                  })
+                }}
+              >Delete
+              </Button>
             </Col>
           </FormGroup>
         </Col>
@@ -170,6 +198,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     onChangeBookDataAction: (book) => {
       dispatch(onChangeBookData({ book }))
+    },
+    onDeleteBookRequestAction: ({ id }) => {
+      dispatch(onDeleteBookRequest({ id }))
     },
     onUpdateBookRequestAction: (book) => {
       dispatch(onUpdateBookRequest({
