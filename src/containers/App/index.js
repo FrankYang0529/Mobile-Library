@@ -10,6 +10,7 @@ import { connect } from 'react-redux'
 import HomePage from '../HomePage'
 import LoginPage from '../LoginPage'
 import BookListPage from '../BookListPage'
+import BookPage from '../BookPage'
 import NewBookPage from '../NewBookPage'
 import RegisterPage from '../RegisterPage'
 import Header from '../../components/Header'
@@ -47,6 +48,10 @@ class App extends React.Component {
               <Route
                 path='/new'
                 render={props => user ? <NewBookPage /> : <Redirect to={{pathname: '/login'}} />}
+              />
+              <Route
+                path='/book/:id'
+                render={props => user ? <BookPage {...props} /> : <Redirect to={{pathname: '/login'}} />}
               />
             </Switch>
           </Router>
