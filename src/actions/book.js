@@ -50,10 +50,10 @@ export const onUpdateBookRequest = ({ book }) => (
   }
 )
 
-export const onDeleteBookRequest = ({ _id }) => (
+export const onDeleteBookRequest = ({ id }) => (
   {
     type: DELETE_BOOK_REQUEST,
-    payload: { _id }
+    payload: { id }
   }
 )
 

@@ -9,6 +9,7 @@ import watchRegister from './auth/register'
 import watchGetBookList from './book/getBookList'
 import watchGetBook from './book/getBook'
 import watchUpdateBook from './book/updateBook'
+import watchDeleteBook from './book/deleteBook'
 
 function * rootSaga () {
   yield all([
@@ -18,7 +19,8 @@ function * rootSaga () {
     watchRegister(),
     watchGetBookList(),
     watchGetBook(),
-    watchUpdateBook()
+    watchUpdateBook(),
+    watchDeleteBook()
   ])
 }
 
