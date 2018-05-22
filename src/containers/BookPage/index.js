@@ -6,11 +6,12 @@ import { Col,
   Label,
   Button
 } from 'reactstrap'
-import DatePicker from 'react-date-picker'
+// import DatePicker from 'react-date-picker'
 
 import './style.css'
 import {
   onGetBookRequest,
+  onUpdateBookRequest,
   onChangeBookData
 } from '../../actions/book'
 
@@ -22,9 +23,8 @@ class BookPage extends React.Component {
   }
 
   render () {
-    const { onChangeBookDataAction, book } = this.props
-    console.log(book)
-    const createdAt = book.created_at ? new Date(book.created_at) : new Date(null)
+    const { onUpdateBookRequestAction, onChangeBookDataAction, book } = this.props
+    // const createdAt = book.created_at ? new Date(book.created_at) : new Date(null)
 
     return (
       <div className='row'>
@@ -122,7 +122,7 @@ class BookPage extends React.Component {
               />
             </Col>
           </FormGroup>
-          <FormGroup row>
+          {/* <FormGroup row>
             <Label for='createdAt' md={4}>Created Date</Label>
             <Col md={8}>
               <DatePicker
@@ -136,10 +136,18 @@ class BookPage extends React.Component {
                 }}
               />
             </Col>
-          </FormGroup>
+          </FormGroup> */}
           <FormGroup row>
             <Col xs={{ size: 10, offset: 1 }} sm={{ size: 12, offset: 0 }}>
-              <Button color='primary' block>Save</Button>
+              <Button
+                block
+                color='primary'
+                onClick={(e) => {
+                  e.preventDefault()
+                  onUpdateBookRequestAction(book)
+                }}
+              >Update
+              </Button>
               <Button color='danger' block>Delete</Button>
             </Col>
           </FormGroup>
@@ -162,6 +170,19 @@ const mapDispatchToProps = (dispatch) => {
     },
     onChangeBookDataAction: (book) => {
       dispatch(onChangeBookData({ book }))
+    },
+    onUpdateBookRequestAction: (book) => {
+      dispatch(onUpdateBookRequest({
+        book: {
+          _id: book._id,
+          name: book.name,
+          authors: book.authors,
+          publisher: book.publisher,
+          previewLink: book.previewLink,
+          isbn_10: book.isbn_10,
+          isbn_13: book.isbn_13
+        }
+      }))
     }
   }
 }
