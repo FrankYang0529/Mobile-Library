@@ -53,7 +53,7 @@ class SearchBook extends React.Component {
   }
 }
 
-const mapDispatchToState = (dispatch) => {
+const mapDispatchToProps = (dispatch) => {
   return {
     onSearchBookAction: ({ keyword }) => {
       dispatch(onSearchBook({ keyword }))
@@ -61,4 +61,4 @@ const mapDispatchToState = (dispatch) => {
   }
 }
 
-export default connect(null, mapDispatchToState)(SearchBook)
+export default connect(null, mapDispatchToProps)(SearchBook)
