@@ -1,0 +1,9 @@
+.step {
+  padding: 4px;
+  border: 1px solid #ddd;
+}
+
+.step .step-text {
+  margin-top: 0;
+  margin-bottom: 0;
+}
