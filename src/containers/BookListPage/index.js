@@ -5,6 +5,7 @@ import moment from 'moment'
 import './style.css'
 import SearchBook from './SearchBook'
 import { onGetBookListRequest } from '../../actions/book'
+import { Container, Col, Row } from 'reactstrap'
 
 class BookListPage extends React.Component {
   componentDidMount () {
@@ -20,34 +21,36 @@ class BookListPage extends React.Component {
     ) : books
 
     return (
-      <div className='row'>
+      <Container>
         <SearchBook />
-        <div className='w-100' />
-        {
-          bookList.map(book => {
-            const createdAt = moment(book.created_at, 'ddd, DD MMM YYYY HH:mm:ss')
+        <Row>
+          <div className='w-100' />
+          {
+            bookList.map(book => {
+              const createdAt = moment(book.created_at, 'ddd, DD MMM YYYY HH:mm:ss')
 
-            return (
-              <div key={book._id} className='book col-sm-6 col-md-3'>
-                <a href={`/book/${book._id}`}>
-                  <img
-                    src={book.imgLink}
-                    alt={`${book.name} icon`}
-                    className='rounded book-cover'
-                  />
-                </a>
-                <div className='book-content'>
-                  <a href={`/book/${book._id}`} className='alert-link book-name-link'>
-                    <span className='book-name text-center'>{book.name}</span>
+              return (
+                <Col sm='6' md='3' key={book._id} className='book'>
+                  <a href={`/book/${book._id}`}>
+                    <img
+                      src={book.imgLink}
+                      alt={`${book.name} icon`}
+                      className='rounded book-cover'
+                    />
                   </a>
-                  <span className='book-author text-sm-left'>{book.authors.join(', ')}</span>
-                  <span className='book-date text-sm-right'>{createdAt.format('YYYY-MM-DD')}</span>
-                </div>
-              </div>
-            )
-          })
-        }
-      </div>
+                  <div className='book-content'>
+                    <a href={`/book/${book._id}`} className='alert-link book-name-link'>
+                      <span className='book-name text-center'>{book.name}</span>
+                    </a>
+                    <span className='book-author text-sm-left'>{book.authors.join(', ')}</span>
+                    <span className='book-date text-sm-right'>{createdAt.format('YYYY-MM-DD')}</span>
+                  </div>
+                </Col>
+              )
+            })
+          }
+        </Row>
+      </Container>
     )
   }
 }

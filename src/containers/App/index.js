@@ -30,32 +30,30 @@ class App extends React.Component {
     return (
       <div>
         <Header user={user} />
-        <div className='container'>
-          <Router>
-            <Switch>
-              <Route
-                exact path='/'
-                render={props => user ? <BookListPage /> : <HomePage />}
-              />
-              <Route
-                path='/login'
-                render={props => user ? <Redirect to={{pathname: '/'}} /> : <LoginPage />}
-              />
-              <Route
-                path='/register'
-                render={props => user ? <Redirect to={{pathname: '/'}} /> : <RegisterPage />}
-              />
-              <Route
-                path='/new'
-                render={props => user ? <NewBookPage /> : <Redirect to={{pathname: '/login'}} />}
-              />
-              <Route
-                path='/book/:id'
-                render={props => user ? <BookPage {...props} /> : <Redirect to={{pathname: '/login'}} />}
-              />
-            </Switch>
-          </Router>
-        </div>
+        <Router>
+          <Switch>
+            <Route
+              exact path='/'
+              render={props => user ? <BookListPage /> : <HomePage />}
+            />
+            <Route
+              path='/login'
+              render={props => user ? <Redirect to={{pathname: '/'}} /> : <LoginPage />}
+            />
+            <Route
+              path='/register'
+              render={props => user ? <Redirect to={{pathname: '/'}} /> : <RegisterPage />}
+            />
+            <Route
+              path='/new'
+              render={props => user ? <NewBookPage {...props} /> : <Redirect to={{pathname: '/login'}} />}
+            />
+            <Route
+              path='/book/:id'
+              render={props => user ? <BookPage {...props} /> : <Redirect to={{pathname: '/login'}} />}
+            />
+          </Switch>
+        </Router>
       </div>
     )
   }
