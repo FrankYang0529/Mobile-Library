@@ -1,3 +1,5 @@
+const searchBook = require('search-book')
+
 const Book = require('../models/book')
 
 /**
@@ -56,6 +58,32 @@ const getBooks = async (ctx, next) => {
 
   ctx.status = 200
   ctx.body = { books: booksJSON }
+}
+
+/**
+ * @api {post} /book/crawl Crawl books
+ * @apiName CrawlBooks
+ * @apiGroup book
+ *
+ * @apiSuccessExample Success-Response:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    "books": [
+ *      {
+ *        title: '橡皮擦計畫：兩位天才心理學家，一段改變世界的情誼',
+ *        authors: [ '麥可．路易士', '吳凱琳' ],
+ *        publisher: '早安財經',
+ *        link: 'http://search.books.com.tw/redirect/move/key/%E5%BF%AB%E6%80%9D%E6%85%A2%E6%83%B3/area/mid/item/0010782516/page/1/idx/20/cat/001/pdf/1',
+ *        imageLink: 'https://im1.book.com.tw/image/getImage?i=https://www.books.com.tw/img/001/078/25/0010782516.jpg&w=85&h=120&v=5aab9cfc',
+ *        isbn10: '',
+ *        isbn13: '9789866613944'
+ *      }
+ *    ]
+ *  }
+ */
+const crawlBooks = async (ctx, next) => {
+  const books = await searchBook('book', ctx.request.body.query)
+  ctx.body = { books }
 }
 
 /**
@@ -138,6 +166,7 @@ const deleteBook = async (ctx, next) => {
 module.exports = {
   createBook,
   getBooks,
+  crawlBooks,
   getBook,
   updateBook,
   deleteBook
