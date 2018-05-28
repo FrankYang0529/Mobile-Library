@@ -64,7 +64,7 @@ class BookPage extends React.Component {
                   type='text'
                   name='title'
                   id='title'
-                  value={book.name}
+                  value={book.name ? book.name : ''}
                   onChange={(e) => {
                     onChangeBookDataAction({
                       ...book,
@@ -81,7 +81,7 @@ class BookPage extends React.Component {
                   type='text'
                   name='authors'
                   id='authors'
-                  value={book.authors}
+                  value={book.authors ? book.authors : ''}
                   onChange={(e) => {
                     onChangeBookDataAction({
                       ...book,
@@ -98,7 +98,7 @@ class BookPage extends React.Component {
                   type='text'
                   name='publisher'
                   id='publisher'
-                  value={book.publisher}
+                  value={book.publisher ? book.publisher : ''}
                   onChange={(e) => {
                     onChangeBookDataAction({
                       ...book,
@@ -115,7 +115,7 @@ class BookPage extends React.Component {
                   type='text'
                   name='isbn10'
                   id='isbn10'
-                  value={book.isbn_10}
+                  value={book.isbn_10 ? book.isbn_10 : ''}
                   onChange={(e) => {
                     onChangeBookDataAction({
                       ...book,
@@ -132,7 +132,7 @@ class BookPage extends React.Component {
                   type='text'
                   name='isbn13'
                   id='isbn13'
-                  value={book.isbn_13}
+                  value={book.isbn_13 ? book.isbn_13 : ''}
                   onChange={(e) => {
                     onChangeBookDataAction({
                       ...book,

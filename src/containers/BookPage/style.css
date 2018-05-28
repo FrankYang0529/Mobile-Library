@@ -1,3 +1,7 @@
+.book-page {
+  align-items: center;
+}
+
 .book-page .book-cover {
   width: 100%;
 }
