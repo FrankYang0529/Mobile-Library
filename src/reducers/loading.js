@@ -10,7 +10,7 @@ const loading = (state = false, action) => {
     case STOP_LOADING:
       return false
     default:
-      return false
+      return state
   }
 }
 
