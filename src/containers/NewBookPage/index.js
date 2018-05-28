@@ -12,7 +12,7 @@ import {
 } from 'reactstrap'
 
 import './style.css'
-import SearchBookList from './SearchBookList'
+import CrawlBook from './CrawlBook'
 import AddBook from './AddBook'
 
 export default class NewBookPage extends React.Component {
@@ -69,7 +69,7 @@ export default class NewBookPage extends React.Component {
         </Row>
         {
           (step === 1) ? (
-            <SearchBookList />
+            <CrawlBook />
           ) : (
             <AddBook />
           )
