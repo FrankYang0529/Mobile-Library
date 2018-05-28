@@ -9,8 +9,7 @@ export function * crawlBook (action) {
   try {
     yield put(onStartLoading())
 
-    const books = yield call(crawlBookApi, action.payload)
-    console.log(books)
+    const { books } = yield call(crawlBookApi, action.payload)
     yield put(onCrawlBookSuccess({ books }))
 
     yield put(onStopLoading())
