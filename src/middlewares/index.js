@@ -10,6 +10,7 @@ import watchGetBookList from './book/getBookList'
 import watchGetBook from './book/getBook'
 import watchUpdateBook from './book/updateBook'
 import watchDeleteBook from './book/deleteBook'
+import watchCrawlBook from './book/crawlBook'
 
 function * rootSaga () {
   yield all([
@@ -20,7 +21,8 @@ function * rootSaga () {
     watchGetBookList(),
     watchGetBook(),
     watchUpdateBook(),
-    watchDeleteBook()
+    watchDeleteBook(),
+    watchCrawlBook()
   ])
 }
 

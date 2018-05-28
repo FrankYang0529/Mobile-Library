@@ -2,6 +2,8 @@ import {
   CREATE_BOOK_REQUEST,
   GET_BOOK_LIST_REQUEST,
   GET_BOOK_LIST_SUCCESS,
+  CRAWL_BOOK_REQUEST,
+  CRAWL_BOOK_SUCCESS,
   GET_BOOK_REQUEST,
   GET_BOOK_SUCCESS,
   UPDATE_BOOK_REQUEST,
@@ -54,6 +56,20 @@ export const onDeleteBookRequest = ({ id }) => (
   {
     type: DELETE_BOOK_REQUEST,
     payload: { id }
+  }
+)
+
+export const onCrawlBookRequest = ({ query }) => (
+  {
+    type: CRAWL_BOOK_REQUEST,
+    payload: { query }
+  }
+)
+
+export const onCrawlBookSuccess = ({ books }) => (
+  {
+    type: CRAWL_BOOK_SUCCESS,
+    payload: { books }
   }
 )
 
