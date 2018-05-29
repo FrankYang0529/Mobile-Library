@@ -175,10 +175,37 @@ const updateName = async (ctx, next) => {
   ctx.status = 200
 }
 
+/**
+ * @api {put} /auth/email Update user email
+ * @apiName UpdateEmail
+ * @apiGroup auth
+ *
+ * @apiParam (Request body) {String} email User email.
+ *
+ * @apiSuccessExample Success-Response:
+ *  HTTP/1.1 200 OK
+ *
+ * @apiErrorExample Error-Response:
+ *  HTTP/1.1 401 Unauthorized
+ */
+const updateEmail = async (ctx, next) => {
+  const { email } = ctx.request.body
+
+  await User.findByIdAndUpdate(
+    ctx.state.user._id,
+    {
+      email
+    }
+  )
+
+  ctx.status = 200
+}
+
 module.exports = {
   register,
   login,
   logout,
   me,
-  updateName
+  updateName,
+  updateEmail
 }
