@@ -18,7 +18,10 @@ import {
 import classnames from 'classnames'
 
 import './style.css'
-import { onUpdateEmailRequest } from '../../actions/auth'
+import {
+  onUpdateEmailRequest,
+  onUpdateNameRequest
+} from '../../actions/auth'
 
 class SettingsPage extends React.Component {
   constructor (props) {
@@ -62,6 +65,7 @@ class SettingsPage extends React.Component {
   render () {
     const {
       onUpdateEmailRequestAction,
+      onUpdateNameRequestAction,
       user
     } = this.props
 
@@ -131,6 +135,11 @@ class SettingsPage extends React.Component {
                         color='success'
                         onClick={(e) => {
                           e.preventDefault()
+                          onUpdateNameRequestAction({
+                            user,
+                            firstName: this.firstNameField.current.value,
+                            lastName: this.lastNameField.current.value
+                          })
                         }}
                       >
                         Save
@@ -155,6 +164,11 @@ class SettingsPage extends React.Component {
                         color='success'
                         onClick={(e) => {
                           e.preventDefault()
+                          onUpdateNameRequestAction({
+                            user,
+                            firstName: this.firstNameField.current.value,
+                            lastName: this.lastNameField.current.value
+                          })
                         }}
                       >
                         Save
@@ -184,6 +198,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onUpdateEmailRequestAction: ({ user, email }) => {
       dispatch(onUpdateEmailRequest({ user, email }))
+    },
+    onUpdateNameRequestAction: ({ user, firstName, lastName }) => {
+      dispatch(onUpdateNameRequest({ user, firstName, lastName }))
     }
   }
 }
