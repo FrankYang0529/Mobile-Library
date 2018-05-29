@@ -201,11 +201,48 @@ const updateEmail = async (ctx, next) => {
   ctx.status = 200
 }
 
+/**
+ * @api {put} /auth/password Update user password
+ * @apiName UpdatePassword
+ * @apiGroup auth
+ *
+ * @apiParam (Request body) {String} oldPassword      User old password.
+ * @apiParam (Request body) {String} newPassword      User new password.
+ * @apiParam (Request body) {String} newPasswordTwice User new password twice.
+ *
+ * @apiSuccessExample Success-Response:
+ *  HTTP/1.1 200 OK
+ *
+ * @apiErrorExample Error-Response:
+ *  HTTP/1.1 401 Unauthorized
+ */
+const updatePassword = async (ctx, next) => {
+  const { oldPassword, newPassword, newPasswordTwice } = ctx.request.body
+
+  const user = await User.findById(ctx.state.user._id)
+
+  const isSame = await bcrypt.compare(oldPassword, user.password)
+  if (!isSame || newPassword !== newPasswordTwice) {
+    ctx.throw(401, 'Email or Password error')
+  }
+
+  const hashPassword = await bcrypt.hash(newPassword, 5)
+  await User.findByIdAndUpdate(
+    ctx.state.user._id,
+    {
+      password: hashPassword
+    }
+  )
+
+  ctx.status = 200
+}
+
 module.exports = {
   register,
   login,
   logout,
   me,
   updateName,
-  updateEmail
+  updateEmail,
+  updatePassword
 }

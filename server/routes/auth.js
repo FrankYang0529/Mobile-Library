@@ -10,5 +10,6 @@ router.get('/auth/logout', auth.logout)
 router.get('/auth/me', auth.me)
 router.put('/auth/name', auth.updateName)
 router.put('/auth/email', auth.updateEmail)
+router.put('/auth/password', auth.updatePassword)
 
 module.exports = router
