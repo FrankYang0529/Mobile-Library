@@ -13,6 +13,7 @@ import BookListPage from '../BookListPage'
 import BookPage from '../BookPage'
 import NewBookPage from '../NewBookPage'
 import RegisterPage from '../RegisterPage'
+import SettingsPage from '../SettingsPage'
 import Header from '../../components/Header'
 import { onMeRequest } from '../../actions/auth'
 
@@ -43,6 +44,10 @@ class App extends React.Component {
             <Route
               path='/register'
               render={props => user ? <Redirect to={{pathname: '/'}} /> : <RegisterPage />}
+            />
+            <Route
+              path='/settings'
+              render={props => user ? <SettingsPage /> : <Redirect to={{pathname: '/login'}} />}
             />
             <Route
               path='/new'

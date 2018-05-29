@@ -60,6 +60,9 @@ class WithUser extends React.Component {
                 <span className='pl-2 text-white'>{user.firstName}</span>
               </DropdownToggle>
               <DropdownMenu right>
+                <DropdownItem tag='a' href='/settings'>
+                  Settings
+                </DropdownItem>
                 <DropdownItem onClick={() => { onLogoutRequestAction() }}>
                   Logout
                 </DropdownItem>
