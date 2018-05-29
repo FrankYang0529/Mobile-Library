@@ -2,7 +2,8 @@ import {
   LOGIN_SUCCESS,
   LOGOUT_SUCCESS,
   ME_SUCCESS,
-  ME_ERROR
+  ME_ERROR,
+  UPDATE_EMAIL_SUCCESS
 } from '../constants/auth'
 
 const initState = {
@@ -19,6 +20,13 @@ const auth = (state = initState, action) => {
       return { user: action.payload.user }
     case ME_ERROR:
       return { user: null }
+    case UPDATE_EMAIL_SUCCESS:
+      return {
+        user: {
+          ...action.payload.user,
+          email: action.payload.email
+        }
+      }
     default:
       return state
   }
