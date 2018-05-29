@@ -9,7 +9,8 @@ import {
   REGISTER_REQUEST,
   UPDATE_EMAIL_REQUEST,
   UPDATE_EMAIL_SUCCESS,
-  UPDATE_NAME_REQUEST
+  UPDATE_NAME_REQUEST,
+  UPDATE_NAME_SUCCESS
 } from '../constants/auth'
 
 export const onLoginRequest = ({ email, password }) => (
@@ -86,9 +87,16 @@ export const onUpdateEmailSuccess = ({ user, email }) => (
   }
 )
 
-export const onUpdateNameRequest = ({ firstName, lastName }) => (
+export const onUpdateNameRequest = ({ user, firstName, lastName }) => (
   {
     type: UPDATE_NAME_REQUEST,
-    payload: { firstName, lastName }
+    payload: { user, firstName, lastName }
+  }
+)
+
+export const onUpdateNameSuccess = ({ user, firstName, lastName }) => (
+  {
+    type: UPDATE_NAME_SUCCESS,
+    payload: { user, firstName, lastName }
   }
 )

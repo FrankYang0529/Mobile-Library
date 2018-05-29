@@ -6,6 +6,7 @@ import watchMe from './auth/me'
 import watchLogout from './auth/logout'
 import watchRegister from './auth/register'
 import watchUpdateEmail from './auth/updateEmail'
+import watchUpdateName from './auth/updateName'
 // book
 import watchCreateBook from './book/createBook'
 import watchGetBookList from './book/getBookList'
@@ -21,6 +22,7 @@ function * rootSaga () {
     watchMe(),
     watchRegister(),
     watchUpdateEmail(),
+    watchUpdateName(),
     watchCreateBook(),
     watchGetBookList(),
     watchGetBook(),
