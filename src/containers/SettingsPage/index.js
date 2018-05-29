@@ -20,7 +20,8 @@ import classnames from 'classnames'
 import './style.css'
 import {
   onUpdateEmailRequest,
-  onUpdateNameRequest
+  onUpdateNameRequest,
+  onUpdatePasswordRequest
 } from '../../actions/auth'
 
 class SettingsPage extends React.Component {
@@ -36,6 +37,9 @@ class SettingsPage extends React.Component {
     this.emailField = React.createRef()
     this.firstNameField = React.createRef()
     this.lastNameField = React.createRef()
+    this.oldPasswordField = React.createRef()
+    this.newPasswordField = React.createRef()
+    this.newPasswordTwiceField = React.createRef()
   }
 
   componentDidMount () {
@@ -66,6 +70,7 @@ class SettingsPage extends React.Component {
     const {
       onUpdateEmailRequestAction,
       onUpdateNameRequestAction,
+      onUpdatePasswordRequestAction,
       user
     } = this.props
 
@@ -178,7 +183,62 @@ class SettingsPage extends React.Component {
                 </Form>
               </TabPane>
               <TabPane tabId='2'>
-                Update Password
+                <Form>
+                  <FormGroup row>
+                    <Label for='oldPassword' sm={{ size: 2, offset: 1 }}>Old Password</Label>
+                    <Col sm={5}>
+                      <Input
+                        type='password'
+                        name='oldPassword'
+                        id='oldPassword'
+                        innerRef={this.oldPasswordField}
+                      />
+                    </Col>
+                  </FormGroup>
+                  <FormGroup row>
+                    <Label for='newPassword' sm={{ size: 2, offset: 1 }}>New Password</Label>
+                    <Col sm={5}>
+                      <Input
+                        type='password'
+                        name='newPassword'
+                        id='newPassword'
+                        innerRef={this.newPasswordField}
+                      />
+                    </Col>
+                  </FormGroup>
+                  <FormGroup row>
+                    <Label for='newPassword' sm={{ size: 2, offset: 1 }}>New Password Twice</Label>
+                    <Col sm={5}>
+                      <Input
+                        type='password'
+                        name='newPasswordTwice'
+                        id='newPasswordTwice'
+                        innerRef={this.newPasswordTwiceField}
+                      />
+                    </Col>
+                  </FormGroup>
+                  <FormGroup row>
+                    <Col sm={{ size: 3, offset: 3 }}>
+                      <Button
+                        color='success'
+                        onClick={(e) => {
+                          e.preventDefault()
+                          onUpdatePasswordRequestAction({
+                            oldPassword: this.oldPasswordField.current.value,
+                            newPassword: this.newPasswordField.current.value,
+                            newPasswordTwice: this.newPasswordTwiceField.current.value
+                          })
+
+                          this.oldPasswordField.current.value = ''
+                          this.newPasswordField.current.value = ''
+                          this.newPasswordTwiceField.current.value = ''
+                        }}
+                      >
+                        Update Password
+                      </Button>
+                    </Col>
+                  </FormGroup>
+                </Form>
               </TabPane>
             </TabContent>
           </Col>
@@ -201,6 +261,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     onUpdateNameRequestAction: ({ user, firstName, lastName }) => {
       dispatch(onUpdateNameRequest({ user, firstName, lastName }))
+    },
+    onUpdatePasswordRequestAction: ({ oldPassword, newPassword, newPasswordTwice }) => {
+      dispatch(onUpdatePasswordRequest({ oldPassword, newPassword, newPasswordTwice }))
     }
   }
 }
