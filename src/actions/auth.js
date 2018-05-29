@@ -10,7 +10,8 @@ import {
   UPDATE_EMAIL_REQUEST,
   UPDATE_EMAIL_SUCCESS,
   UPDATE_NAME_REQUEST,
-  UPDATE_NAME_SUCCESS
+  UPDATE_NAME_SUCCESS,
+  UPDATE_PASSWORD_REQUEST
 } from '../constants/auth'
 
 export const onLoginRequest = ({ email, password }) => (
@@ -98,5 +99,12 @@ export const onUpdateNameSuccess = ({ user, firstName, lastName }) => (
   {
     type: UPDATE_NAME_SUCCESS,
     payload: { user, firstName, lastName }
+  }
+)
+
+export const onUpdatePasswordRequest = ({ oldPassword, newPassword, newPasswordTwice }) => (
+  {
+    type: UPDATE_PASSWORD_REQUEST,
+    payload: { oldPassword, newPassword, newPasswordTwice }
   }
 )

@@ -4,6 +4,7 @@ import me from './me'
 import register from './register'
 import updateEmail from './updateEmail'
 import updateName from './updateName'
+import updatePassword from './updatePassword'
 
 export {
   login,
@@ -11,5 +12,6 @@ export {
   me,
   register,
   updateEmail,
-  updateName
+  updateName,
+  updatePassword
 }
