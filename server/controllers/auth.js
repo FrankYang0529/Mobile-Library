@@ -139,15 +139,46 @@ const logout = async (ctx, next) => {
  *  HTTP/1.1 401 Unauthorized
  */
 const me = async (ctx, next) => {
+  const user = await User.findById(ctx.state.user._id)
+
   ctx.status = 200
   ctx.body = {
-    user: ctx.state.user
+    user: user.toJSON()
   }
+}
+
+/**
+ * @api {put} /auth/name Update user name
+ * @apiName UpdateUsername
+ * @apiGroup auth
+ *
+ * @apiParam (Request body) {String} firstName User first name.
+ * @apiParam (Request body) {String} lastName  User last name.
+ *
+ * @apiSuccessExample Success-Response:
+ *  HTTP/1.1 200 OK
+ *
+ * @apiErrorExample Error-Response:
+ *  HTTP/1.1 401 Unauthorized
+ */
+const updateName = async (ctx, next) => {
+  const { firstName, lastName } = ctx.request.body
+
+  await User.findByIdAndUpdate(
+    ctx.state.user._id,
+    {
+      firstName,
+      lastName
+    }
+  )
+
+  ctx.status = 200
 }
 
 module.exports = {
   register,
   login,
   logout,
-  me
+  me,
+  updateName
 }

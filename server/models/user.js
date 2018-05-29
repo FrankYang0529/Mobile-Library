@@ -1,7 +1,5 @@
 const mongoose = require('mongoose')
 
-const Book = require('./book')
-
 const UserSchema = mongoose.Schema({
   email: { type: String, require: true, index: { unique: true } },
   firstName: { type: String, require: true },
@@ -11,7 +9,7 @@ const UserSchema = mongoose.Schema({
 })
 
 UserSchema.path('email').validate((email) => {
-  const emailRegex = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/
+  const emailRegex = /^([\w-.]+@([\w-]+\.)+[\w-]{2,4})?$/
   return emailRegex.test(email)
 }, 'Please fill a valid email address.')
 
