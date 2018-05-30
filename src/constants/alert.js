@@ -1,0 +1,5 @@
+export const PRIMARY_MESSAGE = 'PRIMARY_MESSAGE'
+
+export const DANGER_MESSAGE = 'DANGER_MESSAGE'
+
+export const CLEAR_MESSAGE = 'CLEAR_MESSAGE'

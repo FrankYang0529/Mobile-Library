@@ -6,7 +6,14 @@ import {
   Redirect
 } from 'react-router-dom'
 import { connect } from 'react-redux'
+import {
+  Alert,
+  Container,
+  Col,
+  Row
+} from 'reactstrap'
 
+import './style.css'
 import HomePage from '../HomePage'
 import LoginPage from '../LoginPage'
 import BookListPage from '../BookListPage'
@@ -16,8 +23,15 @@ import RegisterPage from '../RegisterPage'
 import SettingsPage from '../SettingsPage'
 import Header from '../../components/Header'
 import { onMeRequest } from '../../actions/auth'
+import { onClearMessage } from '../../actions/alert'
 
 class App extends React.Component {
+  constructor (props) {
+    super(props)
+
+    this.closeMessage = this.closeMessage.bind(this)
+  }
+
   componentDidMount () {
     const { user, onMeRequestAction } = this.props
     if (user) {
@@ -25,12 +39,37 @@ class App extends React.Component {
     }
   }
 
+  closeMessage () {
+    const { onClearMessageAction } = this.props
+    onClearMessageAction()
+  }
+
   render () {
-    const { user } = this.props
+    const { user, alert } = this.props
 
     return (
       <div>
         <Header user={user} />
+        {
+          alert.message ? (
+            <Container>
+              <Row>
+                <Col md={{ size: 10, offset: 1 }}>
+                  <Alert
+                    color={alert.color}
+                    className='alert-message'
+                    isOpen
+                    toggle={this.closeMessage}
+                  >
+                    {alert.message}
+                  </Alert>
+                </Col>
+              </Row>
+            </Container>
+          ) : (
+            null
+          )
+        }
         <Router>
           <Switch>
             <Route
@@ -65,14 +104,19 @@ class App extends React.Component {
 }
 
 const mapStateToProps = store => {
-  const { user } = store.auth
-  return { user }
+  return {
+    user: store.auth.user,
+    alert: store.alert
+  }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     onMeRequestAction: () => {
       dispatch(onMeRequest())
+    },
+    onClearMessageAction: () => {
+      dispatch(onClearMessage())
     }
   }
 }
