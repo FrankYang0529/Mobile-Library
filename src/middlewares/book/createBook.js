@@ -1,13 +1,15 @@
-import { call, take } from 'redux-saga/effects'
+import { call, put, take } from 'redux-saga/effects'
 
 import { CREATE_NEW_BOOK_REQUEST } from '../../constants/newBook'
+import { onPrimaryMessage, onDangerMessage } from '../../actions/alert'
 import { createBook as createBookApi } from '../../api/book'
 
 export function * createBook (action) {
   try {
     yield call(createBookApi, action.payload)
+    yield put(onPrimaryMessage({ message: 'Create Success' }))
   } catch (error) {
-    console.log(error.message)
+    yield put(onDangerMessage({ message: error.message }))
   }
 }
 

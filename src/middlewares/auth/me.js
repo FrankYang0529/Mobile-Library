@@ -1,6 +1,7 @@
 import { call, put, take } from 'redux-saga/effects'
 
 import { onMeSuccess } from '../../actions/auth'
+import { onDangerMessage } from '../../actions/alert'
 import { ME_REQUEST } from '../../constants/auth'
 import { me as meApi } from '../../api/auth'
 
@@ -15,7 +16,7 @@ export function * me (action) {
     window.localStorage.setItem('user', JSON.stringify(user))
     yield put(onMeSuccess({ user }))
   } catch (error) {
-    console.log(error.message)
+    yield put(onDangerMessage({ message: error.message }))
   }
 }
 

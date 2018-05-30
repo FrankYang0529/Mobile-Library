@@ -2,6 +2,7 @@ import { call, put, take } from 'redux-saga/effects'
 
 import { onCrawlBookSuccess } from '../../actions/book'
 import { onStartLoading, onStopLoading } from '../../actions/loading'
+import { onDangerMessage } from '../../actions/alert'
 import { CRAWL_BOOK_REQUEST } from '../../constants/book'
 import { crawlBook as crawlBookApi } from '../../api/book'
 
@@ -14,7 +15,7 @@ export function * crawlBook (action) {
 
     yield put(onStopLoading())
   } catch (error) {
-    console.log(error.message)
+    yield put(onDangerMessage({ message: 'Server error' }))
   }
 }
 

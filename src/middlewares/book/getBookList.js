@@ -2,6 +2,7 @@ import { call, put, take } from 'redux-saga/effects'
 
 import { onGetBookListSuccess } from '../../actions/book'
 import { GET_BOOK_LIST_REQUEST } from '../../constants/book'
+import { onDangerMessage } from '../../actions/alert'
 import { getBookList as getBookListApi } from '../../api/book'
 
 export function * getBookList () {
@@ -13,7 +14,7 @@ export function * getBookList () {
 
     yield put(onGetBookListSuccess({ books }))
   } catch (error) {
-    console.log(error.message)
+    yield put(onDangerMessage({ message: error.message }))
   }
 }
 
